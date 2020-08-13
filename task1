@@ -1,0 +1,52 @@
+import java.util.*;
+
+class YEF {
+    static int[] ascendingOrder(int[] array) {              /*this method is used to arrange the array generated*/
+        int l = array.length;
+        int i, j, minPos, temp;
+        for (i = 0; i < l - 1; i++) {
+            minPos = i;
+            for (j = i + 1; j < l; j++) {
+                if (array[minPos] > array[j])
+                    minPos = j;
+            }
+            temp = array[minPos];
+            array[minPos] = array[i];
+            array[i] = temp;
+        }
+        return array;
+    }
+
+    static int randomNumberGenerator() {                                    /*This method generates a random number every time it is called*/
+        boolean badValue = true;
+        int a = -1;
+        while (badValue) {
+            a = new Random().nextInt(501);
+            if (a != 0)
+                badValue = !badValue;
+        }
+        return a;
+    }
+
+    static void printAllElements(int[] array) {           /*This method print all the elements in the given array*/
+        int l = array.length;
+        for (int i = 0; i < l; i++)
+            System.out.println(array[i]);
+    }
+
+    public static void main(String[] args) {            /*the main or the "driver" method*/
+        Scanner in = new Scanner(System.in);
+        boolean systumStatus = true;
+        while (systumStatus) {
+            int[] array = new int[10];
+            for (int i = 0; i < 10; i++) {
+                array[i] = randomNumberGenerator();
+            }
+            array = ascendingOrder(array);
+            printAllElements(array);
+            System.out.println("Enter any number other than 0 for next slot or 0 to stop the prediction");
+            if (in.nextInt() == 0)
+                System.exit(0);
+        }
+    }
+}
